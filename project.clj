@@ -37,6 +37,10 @@
                            :source-map-timestamp true
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
                            ;; https://github.com/binaryage/cljs-devtools
+                           :foreign-libs [{:file "js/demo.js"
+                                           :provides ["demo"]
+                                           :module-type :commonjs}]
+
                            :preloads [devtools.preload]}}
                ;; This next build is a compressed minified build for
                ;; production. You can build this with:

@@ -1,6 +1,6 @@
 (ns rea-inc.state
-    (:require [reagent.core :as reagent :refer [atom]]))
+  (:require [reagent.core :as reagent :refer [atom]]))
 
-(defonce app-state (atom [{:text "Hello world!"}]))
+(defonce app-state (atom []))
 
-(defonce click-count (atom 1))
+(defonce click-count (atom 0))
