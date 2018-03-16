@@ -1,9 +1,24 @@
 (ns rea-inc.core
+  (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [reagent.core :as reagent]
             [rea-inc.state :as state]
-            [demo]))
+            [demo]
+            [cljs-http.client :as http]
+            [cljs.core.async :refer [<!]]))
 
 (enable-console-print!)
+
+(def url
+  "https://api.liftit.co/v1/health")
+
+(defn async-call
+  []
+  (go (let [response (<! (http/get
+                          url
+                          {:with-credentials? false}
+                          :headers {"Origin" "*"}))]
+       (prn (:status response))
+       (prn (get (:headers response) "content-type")))))
 
 (defn change
   []
@@ -22,6 +37,8 @@
       {:key i}
       (:text item)])
    [:h3 "Edit this and watch it change!"]
+   [:a {:href "#" :on-click async-call} "Call"]
+   [:br]
    [:a {:href "#" :on-click change} "Hola"]
    [:br]
    [:a {:href "#" :on-click demo/call} "Sape"]])
