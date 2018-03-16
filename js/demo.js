@@ -1,3 +1,5 @@
-module.exports = function demoCall() {
-  console.log("esto es un demo");
+module.exports = {
+  call: () => {
+    alert("esto es un demo");
+  }
 };
