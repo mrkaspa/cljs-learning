@@ -14,9 +14,10 @@
     (swap! state/app-state #(conj % {:text text}))))
 
 (defn hello-world []
-  [:div
-   [:h1 "demo"]
-   (for [[i item] (map vector (range 0 @state/click-count) @state/app-state)]
+  [:div {:style {:border "1px red solid"}}
+   [:h1 {:style {:color "red"}} "demo"]
+   (for [[i item] (map vector (range 0 @state/click-count)
+                   @state/app-state)]
      [:h1
       {:key i}
       (:text item)])
