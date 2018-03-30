@@ -4,7 +4,8 @@
             [rea-inc.state :as state]
             [demo]
             [cljs-http.client :as http]
-            [cljs.core.async :refer [<!]]))
+            [cljs.core.async :refer [<!]]
+            [cuerdas.core :as str]))
 
 (enable-console-print!)
 
@@ -18,30 +19,32 @@
                           {:with-credentials? false}
                           :headers {"Origin" "*"}))]
        (prn (:status response))
-       (prn (get (:headers response) "content-type")))))
+       (prn (get (:headers response) "content-type"))
+       (state/update-header (:headers response)))))
 
 (defn change
   []
-  (swap! state/click-count inc)
+  (state/increment)
   (let [pow (Math/pow @state/click-count 2)
-        text (concat "The Pow number is of " (str @state/click-count) " is " (str pow))]
-    (swap! state/app-state #(conj % {:text text}))))
+        text (str/format "The Pow number is of %s is %s" (str @state/click-count) (str pow))]
+    (state/add-text text)))
 
 (defn hello-world
   []
   [:div {:style {:border "1px red solid"}}
    [:h1 {:style {:color "red"}} "demo"]
    (for [[i item] (map vector (range 0 @state/click-count)
-                   @state/app-state)]
+                   (:items @state/app-state))]
      [:h1
       {:key i}
       (:text item)])
    [:h3 "Edit this and watch it change!"]
-   [:a {:href "#" :on-click async-call} "Call"]
+   [:a {:href "#" :on-click async-call} "Call URL"]
+   [:span (str "response: " (:headers @state/app-state))]
    [:br]
-   [:a {:href "#" :on-click change} "Hola"]
+   [:a {:href "#" :on-click change} "Add Item"]
    [:br]
-   [:a {:href "#" :on-click demo/call} "Sape"]])
+   [:a {:href "#" :on-click demo/call} "Alert JS"]])
 
 (reagent/render-component
  [hello-world]

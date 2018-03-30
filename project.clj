@@ -6,11 +6,14 @@
 
   :min-lein-version "2.7.1"
 
+  :jvm-opts ["--add-modules" "java.xml.bind"]
+
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.908"]
                  [org.clojure/core.async  "0.3.443"]
                  [cljs-http "0.1.44"]
-                 [reagent "0.7.0"]]
+                 [reagent "0.7.0"]
+                 [funcool/cuerdas "2.0.5"]]
 
   :plugins [[lein-figwheel "0.5.13"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
@@ -60,7 +63,7 @@
              :css-dirs ["resources/public/css"]} ;; watch and update CSS
 
              ;; Start an nREPL server into the running figwheel process
-             :nrepl-port 7888
+            :nrepl-port 7888
 
              ;; Server Ring Handler (optional)
              ;; if you want to embed a ring handler into the figwheel http-kit
