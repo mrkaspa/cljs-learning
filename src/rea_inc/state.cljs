@@ -13,7 +13,6 @@
   [header]
   (swap! app-state assoc :headers header))
 
-
 (defn increment
   []
   (swap! click-count inc))

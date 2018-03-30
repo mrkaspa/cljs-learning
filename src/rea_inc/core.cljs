@@ -18,15 +18,13 @@
                           url
                           {:with-credentials? false}
                           :headers {"Origin" "*"}))]
-       (prn (:status response))
-       (prn (get (:headers response) "content-type"))
        (state/update-header (:headers response)))))
 
 (defn change
   []
   (state/increment)
   (let [pow (Math/pow @state/click-count 2)
-        text (str/format "The Pow number is of %s is %s" (str @state/click-count) (str pow))]
+        text (str/format "The Pow number is of %s is %s" @state/click-count pow)]
     (state/add-text text)))
 
 (defn hello-world
