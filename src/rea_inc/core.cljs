@@ -14,24 +14,27 @@
 
 (defn async-call
   []
+  (state/update-header "")
   (go (let [response (<! (http/get
                           url
-                          {:with-credentials? false}
-                          :headers {"Origin" "*"}))]
+                          {:with-credentials? false
+                           :headers {"Origin" "*"}}))]
        (state/update-header (:headers response)))))
 
 (defn change
   []
-  (state/increment)
-  (let [pow (Math/pow @state/click-count 2)
-        text (str/format "The Pow number is of %s is %s" @state/click-count pow)]
+  (let [cnt (state/count-items)
+        pow (Math/pow cnt 2)
+        text (str/format "The Pow number of %s is %s" cnt pow)]
     (state/add-text text)))
 
 (defn hello-world
   []
   [:div {:style {:border "1px red solid"}}
    [:h1 {:style {:color "red"}} "demo"]
-   (for [[i item] (map vector (range 0 @state/click-count)
+   (for [[i item] (map
+                   vector
+                   (range 0 (state/count-items))
                    (:items @state/app-state))]
      [:h1
       {:key i}

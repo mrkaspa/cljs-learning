@@ -3,8 +3,6 @@
 
 (defonce app-state (atom {:headers nil :items []}))
 
-(defonce click-count (atom 0))
-
 (defn add-text
   [text]
   (swap! app-state update-in [:items] conj {:text text}))
@@ -13,6 +11,6 @@
   [header]
   (swap! app-state assoc :headers header))
 
-(defn increment
+(defn count-items
   []
-  (swap! click-count inc))
+  (count (:items @app-state)))
