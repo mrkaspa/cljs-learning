@@ -19,7 +19,7 @@
                           url
                           {:with-credentials? false
                            :headers {"Origin" "*"}}))]
-       (state/update-header (:headers response)))))
+        (state/update-header (:headers response)))))
 
 (defn change
   []
