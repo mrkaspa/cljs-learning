@@ -30,8 +30,8 @@
 
 (defn hello-world
   []
-  [:div {:style {:border "1px red solid"}}
-   [:h1 {:style {:color "red"}} "demo"]
+  [:div {:style {:border "1px blue solid"}}
+   [:h1 {:style {:color "blue"}} "demo"]
    (for [[i item] (map
                    vector
                    (range 0 (state/count-items))
