@@ -16,9 +16,9 @@
   []
   (state/update-header "")
   (go (let [response (<! (http/get
-                          url
-                          {:with-credentials? false
-                           :headers {"Origin" "*"}}))]
+                           url
+                           {:with-credentials? false
+                            :headers           {"Origin" "*"}}))]
         (state/update-header (:headers response)))))
 
 (defn change
@@ -33,9 +33,9 @@
   [:div {:style {:border "1px blue solid"}}
    [:h1 {:style {:color "blue"}} "demo"]
    (for [[i item] (map
-                   vector
-                   (range 0 (state/count-items))
-                   (:items @state/app-state))]
+                    vector
+                    (range 0 (state/count-items))
+                    (:items @state/app-state))]
      [:h1
       {:key i}
       (:text item)])
@@ -48,7 +48,7 @@
    [:a {:href "#" :on-click demo/call} "Alert JS"]])
 
 (reagent/render-component
- [hello-world]
- (. js/document (getElementById "app")))
+  [hello-world]
+  (. js/document (getElementById "app")))
 
 (defn on-js-reload [])
