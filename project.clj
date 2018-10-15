@@ -1,4 +1,4 @@
-(defproject rea-inc "0.1.0-SNAPSHOT"
+(defprojet rea-inc "0.1.0-SNAPSHOT"
   :description "FIXME: write this!"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -15,7 +15,7 @@
                  [reagent "0.7.0"]
                  [funcool/cuerdas "2.0.5"]]
 
-  :plugins [[lein-figwheel "0.5.13"]
+  :plugins [[lein-figwheel "0.5.16"]
             [lein-cljfmt "0.6.1"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
 
@@ -101,13 +101,13 @@
   ;; Please see:
   ;; https://github.com/bhauman/lein-figwheel/wiki/Using-the-Figwheel-REPL-within-NRepl
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.4"]
-                                  [figwheel-sidecar "0.5.13"]
-                                  [com.cemerick/piggieback "0.2.2"]]
+                                  [figwheel-sidecar "0.5.16"]
+                                  [cider/piggieback "0.3.8"]]
                    ;; need to add dev source path here to get user.clj loaded
                    :source-paths ["src" "dev"]
                    ;; for CIDER
-                   :plugins [[cider/cider-nrepl "0.12.0"]]
-                   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+                   :plugins [[cider/cider-nrepl "0.15.1"]]
+                   :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
                    ;; need to add the compliled assets to the :clean-targets
                    :clean-targets ^{:protect false} ["resources/public/js/compiled"
                                                      :target-path]}})
