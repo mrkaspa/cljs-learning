@@ -28,14 +28,25 @@
         text (str/format "The Pow number of %s is %s" cnt pow)]
     (state/add-text text)))
 
+(defn paint-row
+  [row]
+  (let [cols (map (fn [val] [:td val]) row)]
+    [:tr cols]))
+
+(defn paint-matrix
+  [mat]
+  (let [rows (map paint-row mat)]
+    [:table rows]))
+
 (defn hello-world
   []
   [:div {:style {:border "1px blue solid"}}
+   [paint-matrix [[1 1 1] [2 2 2] [3 3 3]]]
    [:h1 {:style {:color "blue"}} "demo"]
    (for [[i item] (map
-                    vector
-                    (range 0 (state/count-items))
-                    (:items @state/app-state))]
+                   vector
+                   (range 0 (state/count-items))
+                   (:items @state/app-state))]
      [:h1
       {:key i}
       (:text item)])
