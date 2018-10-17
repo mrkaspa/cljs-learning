@@ -34,6 +34,7 @@
     [:tr cols]))
 
 (defn paint-matrix
+  "paints a matrix"
   [mat]
   (let [rows (map paint-row mat)]
     [:table rows]))
